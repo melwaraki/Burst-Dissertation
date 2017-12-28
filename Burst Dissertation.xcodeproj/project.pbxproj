@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		386D16AA054719AC64229C71 /* Pods_Burst_DissertationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F0113CA8EBCEB61CDB5C8 /* Pods_Burst_DissertationUITests.framework */; };
 		6A0A9B7C1FF05FD80004A36E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A9B7B1FF05FD80004A36E /* AppDelegate.swift */; };
-		6A0A9B7E1FF05FD80004A36E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A9B7D1FF05FD80004A36E /* ViewController.swift */; };
 		6A0A9B811FF05FD80004A36E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0A9B7F1FF05FD80004A36E /* Main.storyboard */; };
 		6A0A9B841FF05FD80004A36E /* Burst_Dissertation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A9B821FF05FD80004A36E /* Burst_Dissertation.xcdatamodeld */; };
 		6A0A9B861FF05FD80004A36E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A0A9B851FF05FD80004A36E /* Assets.xcassets */; };
 		6A0A9B891FF05FD80004A36E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0A9B871FF05FD80004A36E /* LaunchScreen.storyboard */; };
 		6A0A9B941FF05FD80004A36E /* Burst_DissertationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A9B931FF05FD80004A36E /* Burst_DissertationTests.swift */; };
 		6A0A9B9F1FF05FD80004A36E /* Burst_DissertationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0A9B9E1FF05FD80004A36E /* Burst_DissertationUITests.swift */; };
+		6A51FBF91FF3D802003DB935 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A51FBF81FF3D802003DB935 /* ChatVC.swift */; };
+		6A611F161FF118C70025A68C /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A611F151FF118C70025A68C /* SignupVC.swift */; };
+		6A6243631FF5113600592F6B /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6243621FF5113600592F6B /* AboutVC.swift */; };
+		6A6E5B831FF0750B00EBBD8E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A6E5B821FF0750B00EBBD8E /* GoogleService-Info.plist */; };
+		6A97F3D71FF1D25800EC239B /* AddTopicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A97F3D61FF1D25800EC239B /* AddTopicVC.swift */; };
+		6AE6EAED1FF0792700C79553 /* TopicsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE6EAEC1FF0792700C79553 /* TopicsVC.swift */; };
+		76E3C634FBA1FC7B87F59852 /* Pods_Burst_Dissertation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D50403B5932469F8A55EFC5B /* Pods_Burst_Dissertation.framework */; };
+		8863F0B87FF08E6CC34C5202 /* Pods_Burst_DissertationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 984393161111B19FBBC9638D /* Pods_Burst_DissertationTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,9 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01D9458C8D5F796D2DE5FEAE /* Pods-Burst Dissertation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Burst Dissertation.release.xcconfig"; path = "Pods/Target Support Files/Pods-Burst Dissertation/Pods-Burst Dissertation.release.xcconfig"; sourceTree = "<group>"; };
+		458DB5E25FFA34C96C814B29 /* Pods-Burst DissertationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Burst DissertationUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Burst DissertationUITests/Pods-Burst DissertationUITests.release.xcconfig"; sourceTree = "<group>"; };
+		58DEDECD0504F910C9A420E2 /* Pods-Burst DissertationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Burst DissertationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Burst DissertationTests/Pods-Burst DissertationTests.release.xcconfig"; sourceTree = "<group>"; };
 		6A0A9B781FF05FD80004A36E /* Burst Dissertation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Burst Dissertation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0A9B7B1FF05FD80004A36E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6A0A9B7D1FF05FD80004A36E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6A0A9B801FF05FD80004A36E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6A0A9B831FF05FD80004A36E /* Burst_Dissertation.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Burst_Dissertation.xcdatamodel; sourceTree = "<group>"; };
 		6A0A9B851FF05FD80004A36E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +59,18 @@
 		6A0A9B9A1FF05FD80004A36E /* Burst DissertationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Burst DissertationUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A0A9B9E1FF05FD80004A36E /* Burst_DissertationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Burst_DissertationUITests.swift; sourceTree = "<group>"; };
 		6A0A9BA01FF05FD90004A36E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A51FBF81FF3D802003DB935 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		6A611F151FF118C70025A68C /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		6A6243621FF5113600592F6B /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
+		6A6E5B821FF0750B00EBBD8E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6A97F3D61FF1D25800EC239B /* AddTopicVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTopicVC.swift; sourceTree = "<group>"; };
+		6AE6EAEC1FF0792700C79553 /* TopicsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicsVC.swift; sourceTree = "<group>"; };
+		984393161111B19FBBC9638D /* Pods_Burst_DissertationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Burst_DissertationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5818AC2D5DC14D235B85D9D /* Pods-Burst Dissertation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Burst Dissertation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Burst Dissertation/Pods-Burst Dissertation.debug.xcconfig"; sourceTree = "<group>"; };
+		C634B41113A66F4FD001DFB6 /* Pods-Burst DissertationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Burst DissertationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Burst DissertationUITests/Pods-Burst DissertationUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D50403B5932469F8A55EFC5B /* Pods_Burst_Dissertation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Burst_Dissertation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E96F0113CA8EBCEB61CDB5C8 /* Pods_Burst_DissertationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Burst_DissertationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA0D4E035D5FBBBDB2ADD4FB /* Pods-Burst DissertationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Burst DissertationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Burst DissertationTests/Pods-Burst DissertationTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76E3C634FBA1FC7B87F59852 /* Pods_Burst_Dissertation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8863F0B87FF08E6CC34C5202 /* Pods_Burst_DissertationTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				386D16AA054719AC64229C71 /* Pods_Burst_DissertationUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +108,8 @@
 				6A0A9B921FF05FD80004A36E /* Burst DissertationTests */,
 				6A0A9B9D1FF05FD80004A36E /* Burst DissertationUITests */,
 				6A0A9B791FF05FD80004A36E /* Products */,
+				ED5AC230C657018889FCE7B5 /* Pods */,
+				DD20A6B9FFD347DE3F88F7A8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,13 +126,18 @@
 		6A0A9B7A1FF05FD80004A36E /* Burst Dissertation */ = {
 			isa = PBXGroup;
 			children = (
+				6A51FBF81FF3D802003DB935 /* ChatVC.swift */,
+				6A97F3D61FF1D25800EC239B /* AddTopicVC.swift */,
 				6A0A9B7B1FF05FD80004A36E /* AppDelegate.swift */,
-				6A0A9B7D1FF05FD80004A36E /* ViewController.swift */,
 				6A0A9B7F1FF05FD80004A36E /* Main.storyboard */,
+				6A6243621FF5113600592F6B /* AboutVC.swift */,
 				6A0A9B851FF05FD80004A36E /* Assets.xcassets */,
 				6A0A9B871FF05FD80004A36E /* LaunchScreen.storyboard */,
 				6A0A9B8A1FF05FD80004A36E /* Info.plist */,
+				6A6E5B821FF0750B00EBBD8E /* GoogleService-Info.plist */,
 				6A0A9B821FF05FD80004A36E /* Burst_Dissertation.xcdatamodeld */,
+				6AE6EAEC1FF0792700C79553 /* TopicsVC.swift */,
+				6A611F151FF118C70025A68C /* SignupVC.swift */,
 			);
 			path = "Burst Dissertation";
 			sourceTree = "<group>";
@@ -128,6 +160,29 @@
 			path = "Burst DissertationUITests";
 			sourceTree = "<group>";
 		};
+		DD20A6B9FFD347DE3F88F7A8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D50403B5932469F8A55EFC5B /* Pods_Burst_Dissertation.framework */,
+				984393161111B19FBBC9638D /* Pods_Burst_DissertationTests.framework */,
+				E96F0113CA8EBCEB61CDB5C8 /* Pods_Burst_DissertationUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED5AC230C657018889FCE7B5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B5818AC2D5DC14D235B85D9D /* Pods-Burst Dissertation.debug.xcconfig */,
+				01D9458C8D5F796D2DE5FEAE /* Pods-Burst Dissertation.release.xcconfig */,
+				FA0D4E035D5FBBBDB2ADD4FB /* Pods-Burst DissertationTests.debug.xcconfig */,
+				58DEDECD0504F910C9A420E2 /* Pods-Burst DissertationTests.release.xcconfig */,
+				C634B41113A66F4FD001DFB6 /* Pods-Burst DissertationUITests.debug.xcconfig */,
+				458DB5E25FFA34C96C814B29 /* Pods-Burst DissertationUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +190,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A0A9BA31FF05FD90004A36E /* Build configuration list for PBXNativeTarget "Burst Dissertation" */;
 			buildPhases = (
+				FBEFAF4164CA5C4FE6D33104 /* [CP] Check Pods Manifest.lock */,
 				6A0A9B741FF05FD80004A36E /* Sources */,
 				6A0A9B751FF05FD80004A36E /* Frameworks */,
 				6A0A9B761FF05FD80004A36E /* Resources */,
+				53AF659A5EF094D129BB0C0D /* [CP] Embed Pods Frameworks */,
+				ECD1A4B4B169C241AD95DF37 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +210,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A0A9BA61FF05FD90004A36E /* Build configuration list for PBXNativeTarget "Burst DissertationTests" */;
 			buildPhases = (
+				4EDF7E9A9B437C209293FE43 /* [CP] Check Pods Manifest.lock */,
 				6A0A9B8B1FF05FD80004A36E /* Sources */,
 				6A0A9B8C1FF05FD80004A36E /* Frameworks */,
 				6A0A9B8D1FF05FD80004A36E /* Resources */,
+				A4505ADF9D1C85322B8F0CD0 /* [CP] Embed Pods Frameworks */,
+				D46953C3A13711AD0C156690 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +231,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6A0A9BA91FF05FD90004A36E /* Build configuration list for PBXNativeTarget "Burst DissertationUITests" */;
 			buildPhases = (
+				994DF368B1800D6DB008FD90 /* [CP] Check Pods Manifest.lock */,
 				6A0A9B961FF05FD80004A36E /* Sources */,
 				6A0A9B971FF05FD80004A36E /* Frameworks */,
 				6A0A9B981FF05FD80004A36E /* Resources */,
+				76932CA25513F7D9ED62184E /* [CP] Embed Pods Frameworks */,
+				170D47ED06973C4C0978E3D6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -236,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A0A9B891FF05FD80004A36E /* LaunchScreen.storyboard in Resources */,
+				6A6E5B831FF0750B00EBBD8E /* GoogleService-Info.plist in Resources */,
 				6A0A9B861FF05FD80004A36E /* Assets.xcassets in Resources */,
 				6A0A9B811FF05FD80004A36E /* Main.storyboard in Resources */,
 			);
@@ -257,14 +322,188 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		170D47ED06973C4C0978E3D6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Burst DissertationUITests/Pods-Burst DissertationUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4EDF7E9A9B437C209293FE43 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Burst DissertationTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53AF659A5EF094D129BB0C0D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Burst Dissertation/Pods-Burst Dissertation-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AsyncDisplayKit/AsyncDisplayKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/NMessenger/NMessenger.framework",
+				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
+				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
+				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncDisplayKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NMessenger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Burst Dissertation/Pods-Burst Dissertation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76932CA25513F7D9ED62184E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Burst DissertationUITests/Pods-Burst DissertationUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		994DF368B1800D6DB008FD90 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Burst DissertationUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4505ADF9D1C85322B8F0CD0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Burst DissertationTests/Pods-Burst DissertationTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D46953C3A13711AD0C156690 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Burst DissertationTests/Pods-Burst DissertationTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ECD1A4B4B169C241AD95DF37 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Burst Dissertation/Pods-Burst Dissertation-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBEFAF4164CA5C4FE6D33104 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Burst Dissertation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6A0A9B741FF05FD80004A36E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A0A9B7E1FF05FD80004A36E /* ViewController.swift in Sources */,
+				6A6243631FF5113600592F6B /* AboutVC.swift in Sources */,
+				6A51FBF91FF3D802003DB935 /* ChatVC.swift in Sources */,
+				6A611F161FF118C70025A68C /* SignupVC.swift in Sources */,
+				6AE6EAED1FF0792700C79553 /* TopicsVC.swift in Sources */,
 				6A0A9B7C1FF05FD80004A36E /* AppDelegate.swift in Sources */,
 				6A0A9B841FF05FD80004A36E /* Burst_Dissertation.xcdatamodeld in Sources */,
+				6A97F3D71FF1D25800EC239B /* AddTopicVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,11 +667,13 @@
 		};
 		6A0A9BA41FF05FD90004A36E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5818AC2D5DC14D235B85D9D /* Pods-Burst Dissertation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SJ33M62BDK;
 				INFOPLIST_FILE = "Burst Dissertation/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.x.Burst-Dissertation";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -443,11 +684,13 @@
 		};
 		6A0A9BA51FF05FD90004A36E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01D9458C8D5F796D2DE5FEAE /* Pods-Burst Dissertation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SJ33M62BDK;
 				INFOPLIST_FILE = "Burst Dissertation/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.x.Burst-Dissertation";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -458,6 +701,7 @@
 		};
 		6A0A9BA71FF05FD90004A36E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA0D4E035D5FBBBDB2ADD4FB /* Pods-Burst DissertationTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -475,6 +719,7 @@
 		};
 		6A0A9BA81FF05FD90004A36E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58DEDECD0504F910C9A420E2 /* Pods-Burst DissertationTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -492,6 +737,7 @@
 		};
 		6A0A9BAA1FF05FD90004A36E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C634B41113A66F4FD001DFB6 /* Pods-Burst DissertationUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -508,6 +754,7 @@
 		};
 		6A0A9BAB1FF05FD90004A36E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 458DB5E25FFA34C96C814B29 /* Pods-Burst DissertationUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
