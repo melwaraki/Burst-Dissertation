@@ -27,6 +27,8 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
     
     var chatID: String = ""
     var userId: String = ""
+    var vote: Bool = false
+    var lastMessage: String? = nil
     
     var ref: DatabaseReference = DatabaseReference()
 
@@ -42,6 +44,9 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
         messageTextView.layer.borderWidth = 1
         messageTextView.delegate = self
         sendButton.isEnabled = false
+        
+        messagesTable.rowHeight = UITableViewAutomaticDimension
+        messagesTable.estimatedRowHeight = 60
         
         NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -84,30 +89,55 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
             return
         }
         
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        //add message to db
-        let combinedKey = String(Int(NSDate().timeIntervalSince1970)) + "-" + userId
-        let messagesRef = self.ref.child("messages").child(chatID).child(combinedKey)
-        messagesRef.child("text").setValue(messageTextView.text)
-        messagesRef.child("sender").setValue(appDelegate.name)
+        sendMessage(message: messageTextView.text)
         
         messageTextView.text = ""
     }
     
-    func loadMessages() {
+    func sendMessage(message: String) {
+        
+        print("sending message")
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        print("coming through")
+        
+        if(message.isEmpty) {
+            return
+        }
+        
         print("here")
-        print(chatID)
-        _ = self.ref.child("messages").child(chatID).observe(DataEventType.value, with: { (snapshot) in
-            self.messages.removeAll()
-            for i in snapshot.children {
-                let currentMessage = i as! DataSnapshot
+        
+        //add message to db
+        let combinedKey = String(Int(NSDate().timeIntervalSince1970)) + "-" + userId
+        let messagesRef = self.ref.child("messages").child(chatID).child(combinedKey)
+        messagesRef.child("text").setValue(message)
+        messagesRef.child("sender").setValue(appDelegate.name)
+    }
+    
+    func loadMessages() {
+        
+        _ = self.ref.child("messages").child(chatID).observe(DataEventType.childAdded, with: { (snapshot) in
+            var found = false
+//            for i in snapshot.children {
+            
+                let currentMessage = snapshot //i as! DataSnapshot
+//
+//                //if previously found or found now or first message
+//                found = found || self.lastMessage == currentMessage.key || self.messages.count == 0
+//
+//                if(!found || self.lastMessage == currentMessage.key) {
+//                    continue
+//                }
+                
                 let text = currentMessage.childSnapshot(forPath: "text").value as? String ?? "error_message"
                 let sender = currentMessage.childSnapshot(forPath: "sender").value as? String ?? "error_sender"
                 self.messages.append(message(text: text, sender: sender))
-            }
+                
+//                self.lastMessage = currentMessage.key
+//            }
             self.messagesTable.reloadData()
             self.scrollToBottom()
             
@@ -127,14 +157,21 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let currentMessage = messages[indexPath.item]
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let cell = Bundle.main.loadNibNamed("LeftChatCell", owner: self, options: nil)?.first as! LeftChatCell
         
-        cell.textLabel?.text = currentMessage.sender + ": " + currentMessage.text
+        //link xib to swift
+        cell.sender.text = currentMessage.sender
+        cell.message.text = currentMessage.text
+        
+        cell.message.numberOfLines = 0
+        cell.message.lineBreakMode = .byWordWrapping
         
         return cell
     }
     
     @IBAction func leaveChat(_ sender: Any) {
+        
+        self.messageTextView.resignFirstResponder()
         
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
@@ -144,6 +181,12 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
         
         alertView.addButton("Leave") {
             self.decrement(topicId: self.chatID)
+            
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                self.vote = appDelegate.vote
+                appDelegate.vote = false
+            }
+            
             self.dismiss(animated: true, completion: nil)
         }
         alertView.addButton("Stay") {
@@ -161,7 +204,8 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
     
     func decrement(topicId: String) {
         
-        let usersRef = self.ref.child("topics").child(topicId).child("users")
+        let userVote = vote ? "yes" : "no"
+        let usersRef = self.ref.child("topics").child(topicId).child(userVote)
         
         usersRef.runTransactionBlock({ (currentData: MutableData) -> TransactionResult in
             
@@ -170,6 +214,10 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
                 self.ref.child("users").child(uid).child("chat").removeValue()
                 users = users-1
                 currentData.value = users
+                
+                if(users<0) {
+                    currentData.value = 0
+                }
                 
                 return TransactionResult.success(withValue: currentData)
             }
@@ -180,6 +228,10 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

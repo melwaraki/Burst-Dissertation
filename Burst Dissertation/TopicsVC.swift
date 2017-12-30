@@ -19,10 +19,13 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         var question: String
         var yes: Int
         var no: Int
+        var required: Bool
         var id: String
     }
     
     var ref: DatabaseReference = DatabaseReference()
+    var argument: String = ""
+    var alreadyChatting: Bool = false
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return topics.count
@@ -45,15 +48,39 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let currentTopic = topics[indexPath.item]
         
         let alertView = SCLAlertView()
+        var argumentView: UITextView = UITextView()
+        var required: Bool = false
+        
+        self.argument = ""
+        
+        //if required message
+        if(currentTopic.required) {
+            required = true
+            argumentView = alertView.addTextView()
+        }
         
         if(currentTopic.yes < 2) {
             alertView.addButton("Yes") {
+                if(required) {
+                    if(argumentView.text.isEmpty) {
+                        return
+                    } else {
+                        self.argument = argumentView.text
+                    }
+                }
                 self.increment(topicId: currentTopic.id, vote: true)
             }
         }
         
         if(currentTopic.no < 2) {
             alertView.addButton("No") {
+                if(required) {
+                    if(argumentView.text.isEmpty) {
+                        return
+                    } else {
+                        self.argument = argumentView.text
+                    }
+                }
                 self.increment(topicId: currentTopic.id, vote: false)
             }
         }
@@ -79,8 +106,13 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 if(users>1) {
                     print("chat full")
                 } else {
-                    print("we here again")
                     self.ref.child("users").child(uid).child("chat").setValue(topicId)
+                    
+                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                        appDelegate.vote = vote
+                    }
+                    
+                    self.ref.child("users").child(uid).child("vote").setValue(vote)
                     users = users+1
                     currentData.value = users
                     self.hasChat()
@@ -104,7 +136,7 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             signUp()
             return
         }
-        
+        print("y0")
         //sign in
         Auth.auth().signInAnonymously() { (user, error) in
             if(error != nil) {
@@ -116,9 +148,13 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 Database.database().reference().child("users").child(appDelegate.uid).observe(.value, with: { (snapshot) in
                     appDelegate.name = snapshot.childSnapshot(forPath: "name").value as? String ?? ""
                     
+                    print("y1")
                     if(appDelegate.name == "") {
+                        print("y2")
                         self.signUp()
                     } else {
+                        print("y3")
+                        self.alreadyChatting = true
                         self.hasChat()
                     }
                 })
@@ -129,12 +165,10 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func hasChat() {
         ref.child("users").child((Auth.auth().currentUser?.uid)!).child("chat").observeSingleEvent(of: .value, with: { (snapshot) in
-            if(snapshot.value as? String == nil) {
-                print("no chat")
-            } else {
-                print("you have a chat") //this keeps adding a chat for me whenever i leave
+            if(snapshot.value as? String != nil) {
                 self.performSegue(withIdentifier: "openchat", sender: snapshot.value as! String)
             }
+            self.alreadyChatting = false
         })
     }
     
@@ -152,6 +186,7 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         ref = Database.database().reference()
         
         ref.child("topics").observe(.value, with: { (snapshot) in
+            print("rughthere")
             
             self.topics = []
             
@@ -161,9 +196,10 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let question = postSnap.childSnapshot(forPath: "question").value as? String ?? "error_topic"
                 let yes = postSnap.childSnapshot(forPath: "yes").value as? Int ?? 0
                 let no = postSnap.childSnapshot(forPath: "no").value as? Int ?? 0
+                let required = postSnap.childSnapshot(forPath: "require").value as? Bool ?? false
                 let id = postSnap.key
                 
-                self.topics.append(topic(question: question, yes: yes, no: no, id: id))
+                self.topics.append(topic(question: question, yes: yes, no: no, required: required, id: id))
             }
             
             self.topicsTable.reloadData()
@@ -179,9 +215,28 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return
         }
         
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
         let chatVC = (segue.destination).childViewControllers[0] as! ChatVC
         chatVC.userId = (Auth.auth().currentUser?.uid)!
         chatVC.chatID = sender as! String
+        
+        if(alreadyChatting) {return} //dont send if already in chat
+        
+        //send initial message
+        let combinedKey = String(Int(NSDate().timeIntervalSince1970)) + "-" + (Auth.auth().currentUser?.uid)!
+        let messagesRef = self.ref.child("messages").child(sender as! String).child(combinedKey)
+        messagesRef.child("sender").setValue("admin")
+        let name = appDelegate.name
+        var message = "\(name) joined."
+
+        if(!argument.isEmpty) {
+             message.append(" Argument: \(argument)")
+        }
+        
+        messagesRef.child("text").setValue(message)
     }
     
 }
