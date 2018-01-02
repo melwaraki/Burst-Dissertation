@@ -136,7 +136,7 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             signUp()
             return
         }
-        print("y0")
+        
         //sign in
         Auth.auth().signInAnonymously() { (user, error) in
             if(error != nil) {
@@ -148,12 +148,9 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 Database.database().reference().child("users").child(appDelegate.uid).observe(.value, with: { (snapshot) in
                     appDelegate.name = snapshot.childSnapshot(forPath: "name").value as? String ?? ""
                     
-                    print("y1")
                     if(appDelegate.name == "") {
-                        print("y2")
                         self.signUp()
                     } else {
-                        print("y3")
                         self.alreadyChatting = true
                         self.hasChat()
                     }
@@ -186,7 +183,6 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         ref = Database.database().reference()
         
         ref.child("topics").observe(.value, with: { (snapshot) in
-            print("rughthere")
             
             self.topics = []
             

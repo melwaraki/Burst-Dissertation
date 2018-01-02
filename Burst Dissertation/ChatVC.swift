@@ -28,14 +28,12 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
     var chatID: String = ""
     var userId: String = ""
     var vote: Bool = false
-    var lastMessage: String? = nil
     
     var ref: DatabaseReference = DatabaseReference()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         ref = Database.database().reference()
         loadMessages()
         
@@ -92,52 +90,35 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
         sendMessage(message: messageTextView.text)
         
         messageTextView.text = ""
+        self.sendButton.isEnabled = false
     }
     
     func sendMessage(message: String) {
-        
-        print("sending message")
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
         
-        print("coming through")
-        
         if(message.isEmpty) {
             return
         }
         
-        print("here")
+        let messageValues = ["text": message, "sender": appDelegate.name]
         
         //add message to db
         let combinedKey = String(Int(NSDate().timeIntervalSince1970)) + "-" + userId
         let messagesRef = self.ref.child("messages").child(chatID).child(combinedKey)
-        messagesRef.child("text").setValue(message)
-        messagesRef.child("sender").setValue(appDelegate.name)
+        messagesRef.updateChildValues(messageValues) //write at the same time
     }
     
     func loadMessages() {
         
-        _ = self.ref.child("messages").child(chatID).observe(DataEventType.childAdded, with: { (snapshot) in
-            var found = false
-//            for i in snapshot.children {
+        self.ref.child("messages").child(chatID).observe(DataEventType.childAdded, with: { (snapshot) in
+                
+            let text = snapshot.childSnapshot(forPath: "text").value as? String ?? "error_message"
+            let sender = snapshot.childSnapshot(forPath: "sender").value as? String ?? "error_sender"
+            self.messages.append(message(text: text, sender: sender))
             
-                let currentMessage = snapshot //i as! DataSnapshot
-//
-//                //if previously found or found now or first message
-//                found = found || self.lastMessage == currentMessage.key || self.messages.count == 0
-//
-//                if(!found || self.lastMessage == currentMessage.key) {
-//                    continue
-//                }
-                
-                let text = currentMessage.childSnapshot(forPath: "text").value as? String ?? "error_message"
-                let sender = currentMessage.childSnapshot(forPath: "sender").value as? String ?? "error_sender"
-                self.messages.append(message(text: text, sender: sender))
-                
-//                self.lastMessage = currentMessage.key
-//            }
             self.messagesTable.reloadData()
             self.scrollToBottom()
             
@@ -165,6 +146,14 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
         
         cell.message.numberOfLines = 0
         cell.message.lineBreakMode = .byWordWrapping
+        
+//        cell.separatorInset.left = UIScreen.main.bounds.width
+        
+        if(indexPath.item > 0 && currentMessage.sender == messages[indexPath.item-1].sender) {
+            cell.senderHeight.constant = 0
+            cell.senderToTop.constant = -2
+            cell.topLine.constant = 0
+        }
         
         return cell
     }
