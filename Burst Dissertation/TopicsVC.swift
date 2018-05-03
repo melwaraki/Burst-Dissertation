@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SCLAlertView
+import UITextView_Placeholder
 
 class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -35,53 +36,52 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let currentTopic = topics[indexPath.item]
         
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "")
-        cell.textLabel?.text = currentTopic.question
-        cell.detailTextLabel?.text = "Yes: " + String(currentTopic.yes) + "/2, No: " + String(currentTopic.no) + "/2"
-        return cell
+        if let cell = Bundle.main.loadNibNamed("TopicsCell", owner: self, options: nil)?.first as? TopicsCell {
+            print("cool")
+            cell.topicLabel.text = currentTopic.question
+            cell.statsLabel.text = "Yes: " + String(currentTopic.yes) + "/2, No: " + String(currentTopic.no) + "/2"
+//            cell.requiredLabel.text = currentTopic.required ? "Pre-argument" : ""
+            cell.requiredLabel.text = ""
+            return cell
+        }
+        print("why")
+        return UITableViewCell(style: .default, reuseIdentifier: nil)
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        /*
+         right now, the alert is displayed with the view controller, which is obviously a problem.
+        */
         
         tableView.deselectRow(at: indexPath, animated: true)
         
         let currentTopic = topics[indexPath.item]
         
+        let required = false //currentTopic.required
+        
         let alertView = SCLAlertView()
-        var argumentView: UITextView = UITextView()
-        var required: Bool = false
         
         self.argument = ""
-        
-        //if required message
-        if(currentTopic.required) {
-            required = true
-            argumentView = alertView.addTextView()
-        }
         
         if(currentTopic.yes < 2) {
             alertView.addButton("Yes") {
                 if(required) {
-                    if(argumentView.text.isEmpty) {
-                        return
-                    } else {
-                        self.argument = argumentView.text
-                    }
+                    self.performSegue(withIdentifier: "requireArgument", sender: [currentTopic.id, true])
+                } else {
+                    self.increment(topicId: currentTopic.id, vote: true)
                 }
-                self.increment(topicId: currentTopic.id, vote: true)
             }
         }
         
         if(currentTopic.no < 2) {
             alertView.addButton("No") {
                 if(required) {
-                    if(argumentView.text.isEmpty) {
-                        return
-                    } else {
-                        self.argument = argumentView.text
-                    }
+                    self.performSegue(withIdentifier: "requireArgument", sender: [currentTopic.id, false])
+                } else {
+                    self.increment(topicId: currentTopic.id, vote: false)
                 }
-                self.increment(topicId: currentTopic.id, vote: false)
             }
         }
         
@@ -95,6 +95,7 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func increment(topicId: String, vote: Bool) {
+        self.presentedViewController?.dismiss(animated: true, completion: nil)
         
         let userVote = vote ? "yes" : "no"
         let usersRef = self.ref.child("topics").child(topicId).child(userVote)
@@ -107,10 +108,6 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     print("chat full")
                 } else {
                     self.ref.child("users").child(uid).child("chat").setValue(topicId)
-                    
-                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                        appDelegate.vote = vote
-                    }
                     
                     self.ref.child("users").child(uid).child("vote").setValue(vote)
                     users = users+1
@@ -161,6 +158,7 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func hasChat() {
+        print("has chat")
         ref.child("users").child((Auth.auth().currentUser?.uid)!).child("chat").observeSingleEvent(of: .value, with: { (snapshot) in
             if(snapshot.value as? String != nil) {
                 self.performSegue(withIdentifier: "openchat", sender: snapshot.value as! String)
@@ -182,11 +180,27 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         ref = Database.database().reference()
         
+        let alertView = SCLAlertView()
+        
+        alertView.addButton("Opt-In", action: {
+            
+        })
+        
+        alertView.showTitle(
+            "Consent",
+            subTitle: "I'd like to use some anonymous data for"
+                + " a graduation project. No data will be traceable to you or any other user. It's all anonymous."
+                + " \n\nThere's no harm done to you, but it is important that you are aware you're opting into this.",
+            style: .success, closeButtonTitle: "More details",
+            colorStyle: 0xCF5369,
+            colorTextButton: 0xFFFFFF
+        )
+        
         ref.child("topics").observe(.value, with: { (snapshot) in
             
             self.topics = []
             
-            for i in snapshot.children .reversed() {
+            for i in snapshot.children {
                 let postSnap = i as! DataSnapshot
                 
                 let question = postSnap.childSnapshot(forPath: "question").value as? String ?? "error_topic"
@@ -204,6 +218,13 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if(segue.identifier == "requireArgument") {
+            let argVC = segue.destination as! ArgumentVC
+            argVC.topicId = (sender as! [Any])[0] as! String
+            argVC.vote = (sender as! [Any])[1] as! Bool
+            return
+        }
         
         if(Auth.auth().currentUser?.uid == nil
             || sender == nil || !(sender is String)
@@ -223,8 +244,9 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         //send initial message
         let combinedKey = String(Int(NSDate().timeIntervalSince1970)) + "-" + (Auth.auth().currentUser?.uid)!
-        let messagesRef = self.ref.child("messages").child(sender as! String).child(combinedKey)
-        messagesRef.child("sender").setValue("admin")
+//        let messagesRef = self.ref.child("messages").child(sender as! String).child(combinedKey)
+//        messagesRef.child("sender").setValue("admin")
+        
         let name = appDelegate.name
         var message = "\(name) joined."
 
@@ -232,7 +254,13 @@ class TopicsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
              message.append(" Argument: \(argument)")
         }
         
-        messagesRef.child("text").setValue(message)
+//        messagesRef.child("text").setValue(message)
+        
+        let messageValues = ["text": message, "sender": "Admin", "vote": false] as [String : Any]
+        
+        //add message to db
+        let messagesRef = self.ref.child("messages").child(sender as! String).child(combinedKey)
+        messagesRef.updateChildValues(messageValues) //write at the same time
     }
     
 }

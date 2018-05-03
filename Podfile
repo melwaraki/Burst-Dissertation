@@ -15,7 +15,8 @@ target 'Burst Dissertation' do
    pod ‘Firebase/Storage'
    pod 'Firebase/Messaging'
    pod 'SCLAlertView'
-   pod 'NMessenger'
+#   pod 'NMessenger'
+   pod 'UITextView+Placeholder', '~> 1.2'
 
   target 'Burst DissertationTests' do
     inherit! :search_paths

@@ -13,7 +13,6 @@ import Firebase
 class AddTopicVC: UIViewController, UITextViewDelegate {
 
     @IBOutlet var toolbar: UIToolbar!
-    @IBOutlet weak var placeholder: UILabel!
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var submitText: UITextView!
     
@@ -22,6 +21,7 @@ class AddTopicVC: UIViewController, UITextViewDelegate {
         self.submitBtn.isEnabled = false
         self.submitText.becomeFirstResponder()
         self.submitText.inputAccessoryView = toolbar
+//        submitText.placeholder = "Enter the topic of debate..."
     }
     
     @IBAction func cancel(_ sender: UIButton) {
@@ -74,14 +74,7 @@ class AddTopicVC: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        
-        if(submitText.text != "") {
-            placeholder.isHidden = true
-            submitBtn.isEnabled = true
-        } else {
-            placeholder.isHidden = false
-            submitBtn.isEnabled = false
-        }
+        submitBtn.isEnabled = submitText.text != ""
     }
 
 }

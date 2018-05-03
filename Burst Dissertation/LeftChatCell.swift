@@ -14,7 +14,8 @@ class LeftChatCell: UITableViewCell {
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var senderHeight: NSLayoutConstraint!
     @IBOutlet weak var senderToTop: NSLayoutConstraint!
-    @IBOutlet weak var topLine: NSLayoutConstraint!
+    @IBOutlet weak var spaceFromTop: NSLayoutConstraint!
+    @IBOutlet weak var horizontalLine: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

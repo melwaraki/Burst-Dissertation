@@ -8,8 +8,8 @@
 
 import UIKit
 import Firebase
-import NMessenger
-import AsyncDisplayKit
+//import NMessenger
+//import AsyncDisplayKit
 import SCLAlertView
 
 class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -23,6 +23,7 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
     struct message {
         var text: String
         var sender: String
+        var agrees: Bool?
     }
     
     var chatID: String = ""
@@ -33,9 +34,16 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            self.vote = appDelegate.vote
+        }
 
         ref = Database.database().reference()
-        loadMessages()
+        ref.child("users").child(userId).child("vote").observeSingleEvent(of: .value, with: {(snapshot) in
+            self.vote = snapshot.value as? Bool ?? false
+            self.loadMessages()
+        })
         
         messageTextView.layer.cornerRadius = 5
         messageTextView.layer.borderColor = UIColor(red:0.90, green:0.90, blue:0.90, alpha:1.0).cgColor
@@ -103,7 +111,7 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
             return
         }
         
-        let messageValues = ["text": message, "sender": appDelegate.name]
+        let messageValues = ["text": message, "sender": appDelegate.name, "vote": self.vote] as [String : Any]
         
         //add message to db
         let combinedKey = String(Int(NSDate().timeIntervalSince1970)) + "-" + userId
@@ -117,7 +125,8 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
                 
             let text = snapshot.childSnapshot(forPath: "text").value as? String ?? "error_message"
             let sender = snapshot.childSnapshot(forPath: "sender").value as? String ?? "error_sender"
-            self.messages.append(message(text: text, sender: sender))
+            let vote = snapshot.childSnapshot(forPath: "vote").value as? Bool ?? false
+            self.messages.append(message(text: text, sender: sender, agrees: vote))
             
             self.messagesTable.reloadData()
             self.scrollToBottom()
@@ -140,19 +149,27 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
         let currentMessage = messages[indexPath.item]
         let cell = Bundle.main.loadNibNamed("LeftChatCell", owner: self, options: nil)?.first as! LeftChatCell
         
-        //link xib to swift
         cell.sender.text = currentMessage.sender
         cell.message.text = currentMessage.text
+        
+        var color: UIColor
+        
+        if(cell.sender.text?.lowercased() == "admin") {
+            color = UIColor(red:0.00, green:0.39, blue:0.00, alpha:1.0)
+        } else {
+            color = currentMessage.agrees ?? false ? UIColor(red:0.80, green:0.28, blue:0.37, alpha:1.0) : UIColor(red:0.28, green:0.53, blue:0.79, alpha:1.0)
+        }
+        
+        cell.horizontalLine.backgroundColor = color
+        cell.sender.textColor = color
         
         cell.message.numberOfLines = 0
         cell.message.lineBreakMode = .byWordWrapping
         
-//        cell.separatorInset.left = UIScreen.main.bounds.width
-        
         if(indexPath.item > 0 && currentMessage.sender == messages[indexPath.item-1].sender) {
             cell.senderHeight.constant = 0
-            cell.senderToTop.constant = -2
-            cell.topLine.constant = 0
+            cell.senderToTop.constant = -5
+            cell.spaceFromTop.constant = 0
         }
         
         return cell
@@ -201,6 +218,7 @@ class ChatVC: UIViewController, UITextViewDelegate, UITableViewDelegate, UITable
             if var users = currentData.value as? Int, let uid = Auth.auth().currentUser?.uid {
                 
                 self.ref.child("users").child(uid).child("chat").removeValue()
+                self.ref.child("users").child(uid).child("vote").removeValue()
                 users = users-1
                 currentData.value = users
                 
